@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>CoffeeScript Game Life</title>
+    <script src="game_life.js"></script>
+  </head>
+<body>
+<pre id="generation" style="font-family: Courier;">
+........................................
+...**..**...***.***..**....**...........
+..*...*..*..*...*...*..*..*..*..........
+..*...*..*..**..**..***...***...........
+..*...*..*..*...*...*.....*.............
+...**..**...*...*....**....**......*....
+...................................*....
+...................................*....
+........................................
+</pre>
+
+<script>
+  var game = new GameLife({empty_cell:'.', live_cell:'*'})
+  var field = document.getElementById('generation');
+  generation = field.innerHTML;
+  game.set_generation(generation);
+
+  function do_step(){
+    game.do_step();
+    new_generation = game.screen();
+    field.innerHTML = new_generation;
+  }
+</script>
+
+<button onclick="do_step()" >Step</button>
+
+</body>
+</html>
