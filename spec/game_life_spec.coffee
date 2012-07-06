@@ -57,7 +57,7 @@ describe "describe GameLife", ->
     generation = "
 ....\n
 .*..\n
-....\n
+...*\n
 "
     game = new GameLife( { empty_cell: '.', live_cell: '*', map: generation } )
 
@@ -65,6 +65,7 @@ describe "describe GameLife", ->
     expect(game.neighbour_count_at( {col: 0, row: 1} )).toEqual 1
     expect(game.neighbour_count_at( {col: 1, row: 1} )).toEqual 0
     expect(game.neighbour_count_at( {col: 3, row: 0} )).toEqual 0
+    expect(game.neighbour_count_at( {col: 2, row: 1} )).toEqual 2
 
 
  describe "жизнь и смерть", ->
@@ -144,4 +145,25 @@ describe "describe GameLife", ->
 ....\n
 ....\n
 ....\n
+"
+
+      it "светофор", ->
+        first_generation = "
+..*...\n
+..*...\n
+..*...\n
+"
+        game = new GameLife( {empty_cell: '.', live_cell: '*', map: first_generation } )
+        game.do_step()
+        expect(game.screen()).toEqual "
+......\n
+.***..\n
+......\n
+"
+
+        game.do_step()
+        expect(game.screen()).toEqual "
+..*...\n
+..*...\n
+..*...\n
 "

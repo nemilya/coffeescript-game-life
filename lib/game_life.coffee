@@ -60,10 +60,10 @@ class GameLife
       cur_row += 1
 
   is_cell_life: (location) ->
-    x = location["col"]
-    y = location["row"]
-    if @cells[x] && @cells[x][y]
-      return @cells[x][y] == @live_cell
+    c = location["col"]
+    r = location["row"]
+    if @cells[r] && @cells[r][c]
+      return @cells[r][c] == @live_cell
     return false
 
   neighbour_count_at: (location) ->
@@ -80,8 +80,9 @@ class GameLife
       at_location = {}
       at_location["row"] = location["row"] + v[0]
       at_location["col"] = location["col"] + v[1]
-      cnt += 1 if @is_cell_life(at_location)
-    cnt
+      if @is_cell_life(at_location)
+        cnt += 1 
+    return cnt
 
   is_cell_will_be_live: (cell, neighbour_count) ->
     return true if cell == @empty_cell && neighbour_count == 3
